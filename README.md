@@ -1,6 +1,6 @@
 # pass.in
 
-O pass.in é uma aplicação de **gestão de participantes em eventos presenciais**. 
+O pass.in é uma aplicação de **gestão de participantes em eventos presenciais**.
 
 A ferramenta permite que o organizador cadastre um evento e abra uma página pública de inscrição.
 
@@ -14,7 +14,7 @@ O sistema fará um scan da credencial do participante para permitir a entrada no
 
 - [x] O organizador deve poder cadastrar um novo evento;
 - [x] O organizador deve poder visualizar dados de um evento;
-- [x] O organizador deve poser visualizar a lista de participantes; 
+- [x] O organizador deve poser visualizar a lista de participantes;
 - [x] O participante deve poder se inscrever em um evento;
 - [x] O participante deve poder visualizar seu crachá de inscrição;
 - [x] O participante deve poder realizar check-in no evento;
@@ -55,18 +55,18 @@ CREATE TABLE "events" (
 
 -- CreateTable
 CREATE TABLE "attendees" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" INTEGER NOT NULL PRIMARY KEY SERIAL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "event_id" TEXT NOT NULL,
-    "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT "attendees_event_id_fkey" FOREIGN KEY ("event_id") REFERENCES "events" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
 CREATE TABLE "check_ins" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" INTEGER NOT NULL PRIMARY KEY SERIAL,
+    "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "attendeeId" INTEGER NOT NULL,
     CONSTRAINT "check_ins_attendeeId_fkey" FOREIGN KEY ("attendeeId") REFERENCES "attendees" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
